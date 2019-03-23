@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { viewAttached } from '@angular/core/src/render3/instructions';
-import { AnyTxtRecord } from 'dns';
+
 
 @Component({
   selector: 'app-dashboard',
