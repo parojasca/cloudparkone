@@ -19,7 +19,8 @@ const routes: Routes = [
    loadChildren: './parque/parque.module#ParquePageModule' },
   { 
     path: 'dashboard',
-   loadChildren: './dashboard/dashboard.module#DashboardPageModule' }
+   loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
+  { path: 'add-article', loadChildren: './add-article/add-article.module#AddArticlePageModule' }
 ];
 
 @NgModule({
