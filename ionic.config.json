@@ -1,5 +1,7 @@
 {
   "name": "cloudparkone",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

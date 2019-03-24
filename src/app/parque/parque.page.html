@@ -16,17 +16,20 @@
   
   
   <!-- Searchbar with a cancel button and custom cancel button text -->
-  <ion-searchbar showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
-  
+ <ion-searchbar showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
+  <!-- 
  <ion-list  class="list list-md hydrated" *ngFor="let par of parques; let i = index">
     <div class="item-note" >
       {{par.parque}}
     </div>
 
- 
-    
   </ion-list>
-
+-->
+<ion-fab vertical="center" horizontal="end" slot="fixed" (click)="presentModal()">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
   
 </ion-content>
 

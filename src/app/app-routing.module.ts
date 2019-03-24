@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'parque',
     pathMatch: 'full'
   },
   {
@@ -20,7 +20,8 @@ const routes: Routes = [
   { 
     path: 'dashboard',
    loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
-  { path: 'add-article', loadChildren: './add-article/add-article.module#AddArticlePageModule' }
+  { path: 'add-article', loadChildren: './add-article/add-article.module#AddArticlePageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
 
 @NgModule({

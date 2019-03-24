@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import {AddArticlePage} from '../add-article/add-article.page'
 @Component({
   selector: 'app-parque',
   templateUrl: './parque.page.html',
   styleUrls: ['./parque.page.scss'],
 })
 export class ParquePage implements OnInit {
-
-  constructor(public alertController: AlertController) { }
+//,public modalController: ModalController
+  constructor(public alertController: AlertController,public modalController: ModalController) { }
 
   async ngOnInit() {
     const alert = await this.alertController.create({
@@ -19,18 +21,12 @@ export class ParquePage implements OnInit {
     await alert.present();
   }
 
-  async about() {
-    let alert = await this.alertController.create({
-     
-      header: 'This is a subtitle',
-      cssClass: 'custom-alertDanger',
-      message: `<p>This is a message </p>`, 
-      buttons: [
-        {
-          text: 'OK',
-          role: 'cancel',
-          handler: () => {}}]});
-          await alert.present();
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AddArticlePage,
+      componentProps: { value: 123 }
+    });
+    return await modal.present();
   }
 
   locali:string;

@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
 
+import {AddArticlePageModule} from './add-article/add-article.module'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -17,7 +19,8 @@ import { ChartsModule } from 'ng2-charts';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ChartsModule
+   ChartsModule
+   ,    AddArticlePageModule
   ],
   providers: [
     StatusBar,

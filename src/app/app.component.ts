@@ -28,6 +28,11 @@ export class AppComponent {
       title:'dashboard',
       url:'/dashboard',
       icon:'trending-up'
+    },
+    {
+      title:'Login',
+      url:'/login',
+      icon:'log-in'
     }
   ];
 
