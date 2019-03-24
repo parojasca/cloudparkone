@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+constructor(){
+
+}
+
+nombre='PEDRO ROJAS';
+numero=2.21544;
+valor=500000;
+
+
+
 }
