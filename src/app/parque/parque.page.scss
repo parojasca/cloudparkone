@@ -1,12 +1,21 @@
-
-   .md,.ios,.wp {
-  //   page-parque {
-      .custom-alertDanger {
+.md,
+.ios,
+.wp {
+    //   page-parque {
+    .custom-alertDanger {
         background-color: #F35E5D !important;
-        background: #F35E5D  !important;
+        background: #F35E5D !important;
         color: red !important;
         $alert-md-background-color: #F35E5D;
         $alert-ios-background: #F35E5D;
-      }
-          }
-    //}}
+    }
+}
+
+//}}
+.map {
+    height: 100%;
+}
+
+.buscar {
+    width: 100%;
+}
