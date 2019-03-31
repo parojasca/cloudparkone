@@ -99,6 +99,7 @@ async onButtonClick() {
       title: '@ionic-native/google-maps plugin!',
       snippet: 'This plugin is awesome!',
       position: location.latLng,
+      draggable: true,
       animation: GoogleMapsAnimation.BOUNCE
     });
 
