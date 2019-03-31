@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController,NavController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
@@ -9,15 +9,32 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class AddArticlePage implements OnInit {
 //,private camera: Camera
-  constructor(public modalController: ModalController) { }
 
-  ngOnInit() {
+
+  constructor(public modalController: ModalController,
+    private navCtrl: NavController       
+    
+
+ 
+   ) { }
+
+  async ngOnInit() {
+   // await this.platform.ready();
+   // await this.loadMap();
+   
+  // this.loadMap();
   }
 
   cerrarModal() {
    this.modalController.dismiss()
 
   }
+  navMapa(){
+    this.modalController.dismiss();
+    this.navCtrl.navigateForward('map-add-article')
+   
+  }
+
 /*
   async activeCamara(){
   const options: CameraOptions = {

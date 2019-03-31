@@ -21,7 +21,8 @@ const routes: Routes = [
     path: 'dashboard',
    loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
   { path: 'add-article', loadChildren: './add-article/add-article.module#AddArticlePageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },  { path: 'map-add-article', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' }
+
 ];
 
 @NgModule({

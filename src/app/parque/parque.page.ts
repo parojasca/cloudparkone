@@ -6,6 +6,21 @@ import {AddArticlePage} from '../add-article/add-article.page'
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 declare var google: any;
 
+import {
+  ToastController,
+  Platform,
+  LoadingController
+} from '@ionic/angular';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  MarkerOptions,
+  GoogleMapsAnimation,
+  MyLocation
+} from '@ionic-native/google-maps';
+
 @Component({
   selector: 'app-parque',
   templateUrl: './parque.page.html',
@@ -14,20 +29,17 @@ declare var google: any;
 
 export class ParquePage implements OnInit {
 
-  @ViewChild('Map') mapElement: ElementRef;
-  map: any;
-  mapOptions: any;
-  location = {lat: null, lng: null};
-  markerOptions: any = {position: null, map: null, title: null};
-  marker: any;
-  apiKey: any = 'AIzaSyAjTjGIunMIKzq8jybWY-cm4d1N9-4-dGQ'; /*Your API Key*/
-
+  map: GoogleMap;
+  loading: any;
 
 //,public modalController: ModalController
   constructor(public alertController: AlertController,
     public modalController: ModalController,
     public zone: NgZone,
-    public geolocation: Geolocation) {
+    public geolocation: Geolocation,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    private platform: Platform) {
   }
      
 
@@ -39,38 +51,80 @@ export class ParquePage implements OnInit {
     });
 
     await alert.present();
+    await this.platform.ready();
+    await this.loadMap();
+    }
 
-    
-      /*load google map script dynamically */
-      const script = document.createElement('script');
-      script.id = 'googleMap';
-      if (this.apiKey) {
-          script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey;
-      } else {
-          script.src = 'https://maps.googleapis.com/maps/api/js?key=';
-      }
-      document.head.appendChild(script);
-      /*Get Current location*/
-      this.geolocation.getCurrentPosition().then((position) =>  {
-          this.location.lat = position.coords.latitude;
-          this.location.lng = position.coords.longitude;
+    loadMap() {
+      this.map = GoogleMaps.create('map_canvas', {
+        controls:{
+          myLocationButton:true
+        },
+        camera: {
+          target: {
+            lat: 4.645796,
+            lng: -74.088352
+           
+          },
+          zoom: 11,
+          tilt: 30
+        },
+        
       });
-      /*Map options*/
-      this.mapOptions = {
-          center: this.location,
-          zoom: 19,
-          mapTypeControl: false,
-          fullscreenControl: false
-      };
-      setTimeout(() => {
-          this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
-          /*Marker Options*/
-          this.markerOptions.position = this.location;
-          this.markerOptions.map = this.map;
-          this.markerOptions.title = 'My Location';
-          this.marker = new google.maps.Marker(this.markerOptions);
-      }, 3000);
-  }
+  
+    }
+//Ubicarme
+async onButtonClick() {
+  this.map.clear();
+
+  this.loading = await this.loadingCtrl.create({
+    message: 'Please wait...'
+  });
+  await this.loading.present();
+
+  // Get the location of you
+  this.map.getMyLocation().then((location: MyLocation) => {
+    this.loading.dismiss();
+    console.log(JSON.stringify(location, null ,2));
+
+    // Move the map camera to the location with animation
+    this.map.animateCamera({
+      target: location.latLng,
+      zoom: 17,
+      tilt: 30
+    });
+
+    // add a marker
+    let marker: Marker = this.map.addMarkerSync({
+      title: '@ionic-native/google-maps plugin!',
+      snippet: 'This plugin is awesome!',
+      position: location.latLng,
+      animation: GoogleMapsAnimation.BOUNCE
+    });
+
+    // show the infoWindow
+    marker.showInfoWindow();
+
+    // If clicked it, display the alert
+    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+      this.showToast('clicked!');
+    });
+  })
+  .catch(err => {
+    this.loading.dismiss();
+    this.showToast(err.error_message);
+  });
+}
+
+async showToast(message: string) {
+  let toast = await this.toastCtrl.create({
+    message: message,
+    duration: 2000,
+    position: 'middle'
+  });
+
+  toast.present();
+}
 
   async presentModal() {
     const modal = await this.modalController.create({

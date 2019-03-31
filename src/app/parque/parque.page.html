@@ -7,13 +7,14 @@
             Parques
         </ion-title>
     </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar class="buscar" showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
     <!-- Searchbar with a cancel button and custom cancel button text -->
-    <ion-fab>
-        <ion-searchbar class="buscar" showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
-    </ion-fab>
+  
 
     <!-- 
  <ion-list  class="list list-md hydrated" *ngFor="let par of parques; let i = index">
@@ -28,9 +29,16 @@
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-    <div #Map class="map">
+  
 
-
+    <div id="map_canvas">
+        
+  
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="onButtonClick()" size="small" >
+    <ion-fab-button>
+      <ion-icon name="locate" ></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
     </div>
 
 

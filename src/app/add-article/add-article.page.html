@@ -15,7 +15,7 @@
     <ion-list-header>Agregar Articulos</ion-list-header>
     <ion-item>
       <ion-label>Tipo Articulo</ion-label>
-      <ion-select value="brown" okText="Ok" cancelText="Cancelar">
+      <ion-select value="brown" okText="Ok" cancelText="Cancelar" >
         <ion-select-option value="silla">Silla</ion-select-option>
         <ion-select-option value="caseta">Caseta</ion-select-option>
         <ion-select-option value="arbol">Arbol</ion-select-option>
@@ -46,6 +46,11 @@
      
     </ion-item>
   </ion-list>
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea rows="6"></ion-textarea>
+  </ion-item>
+  
  <div class="col-md-12">
   <!-- Icons -->
 <ion-button (click)="cerrarModal()">
@@ -53,7 +58,7 @@
  CANCELAR
 </ion-button>
 
-<ion-button (click)="cerrarModal()">
+<ion-button (click)="navMapa()">
   AGREAGR
   <ion-icon slot="end" name="checkmark"></ion-icon>
 </ion-button>
