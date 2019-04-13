@@ -8,7 +8,8 @@ import {
   BaseArrayClass,
   ILatLng,
   LatLng,
-  MarkerCluster
+  MarkerCluster,
+  GoogleMapsAnimation
   
 } from '@ionic-native/google-maps';
 import { Platform } from '@ionic/angular';
@@ -19,16 +20,7 @@ import { Platform } from '@ionic/angular';
 })
 export class MapAddArticlePage implements OnInit {
   map: GoogleMap;
-  GORYOKAKU_POINTS: ILatLng[] =[
-    {lat: 4.664824, lng: -74.093119},//, 
-    {lat: 4.660825, lng: -74.089943},//, 
-    {lat: 4.658312, lng: -74.089546},//, 
-    {lat: 4.653086, lng: -74.092121},//, 
-    {lat: 4.656241, lng: -74.098709},//, 
-    {lat: 4.658914, lng: -74.098827},//, 
-    {lat: 4.664122, lng: -74.094782}//, 
-  
-  ];
+  GORYOKAKU_POINTS: ILatLng[] =[];
 
 
   constructor(private platform: Platform) { }
@@ -40,7 +32,12 @@ export class MapAddArticlePage implements OnInit {
   loadMap() {
     this.map = GoogleMaps.create('map_canvas', {
       camera: {
-        target: this.GORYOKAKU_POINTS
+        target: {
+          lat: 4.645796,
+          lng: -74.088352
+        },
+        zoom: 18,
+        tilt: 30
       }
     });
 
@@ -51,23 +48,54 @@ export class MapAddArticlePage implements OnInit {
       'strokeWidth': 10
     });
 
-    let points: BaseArrayClass<ILatLng> = polygon.getPoints();
-
-    points.forEach((latLng: ILatLng, idx: number) => {
-      let marker: Marker = this.map.addMarkerSync({
-        draggable: true,
-        position: latLng
+      //poligono
+      this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((params: any[]) => {
+        const latLng: LatLng = params[0];
+       let agr=   this.GORYOKAKU_POINTS.push(latLng);
+        console.log(JSON.stringify(location, null, 2));
+        this.map.addMarkerSync({
+          position: latLng,
+          title: latLng.toString(),
+          animation: GoogleMapsAnimation.DROP
+        });
       });
-      marker.on(GoogleMapsEvent.MARKER_DRAG).subscribe((params) => {
-        let position: LatLng = params[0];
-        points.setAt(idx, position);
-      });
-    });
-    this.addCluster(this.dummyData());
+  //poligono
+  
+  
      }
+async onButtonClick() {
+      this.map.clear();
+      this.GORYOKAKU_POINTS=[];
+
+  }
+
+  //poligono
+async pintarPoligonp() {
+  let polygon: Polygon = this.map.addPolygonSync({
+    'points': this.GORYOKAKU_POINTS,
+    'strokeColor' : '#AA00FF',
+    'fillColor' : '#00FFAA',
+    'strokeWidth': 10
+  });
+  const points: BaseArrayClass<ILatLng> = polygon.getPoints();
+
+  points.forEach((latLng: ILatLng, idx: number) => {
+    let marker: Marker = this.map.addMarkerSync({
+      draggable: true,
+      position: latLng
+    });
+    marker.on(GoogleMapsEvent.MARKER_DRAG).subscribe((params) => {
+      let position: LatLng = params[0];
+      points.setAt(idx, position);
+    });
+  });
+}
+//Poligono
+
+
 
 //agrupacion iconos
- 
+ /*
 addCluster(data) {
   let markerCluster: MarkerCluster = this.map.addMarkerClusterSync({
     markers: data,
@@ -176,7 +204,7 @@ dummyData() {
     }
     
   ];
-}
+}*/
 
 
 }

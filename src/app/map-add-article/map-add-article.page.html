@@ -1,9 +1,17 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>map-add-article</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Agregar Punto
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="map_canvas"></div>
+    <div id="map_canvas"></div>
+    <ion-button ion-button (click)="onButtonClick()">Demo</ion-button>
+    <ion-button ion-button (click)="pintarPoligonp()">pintar</ion-button>
+
 </ion-content>

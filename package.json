@@ -84,8 +84,8 @@
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyAjTjGIunMIKzq8jybWY-cm4d1N9-4-dGQ",
-        "API_KEY_FOR_IOS": "AIzaSyAjTjGIunMIKzq8jybWY-cm4d1N9-4-dGQ"
+        "API_KEY_FOR_ANDROID": "AIzaSyCop2lXa9xZu3I9oxh-ZKgl-ADyZeBKY3Q",
+        "API_KEY_FOR_IOS": "AIzaSyCop2lXa9xZu3I9oxh-ZKgl-ADyZeBKY3Q"
       }
     },
     "platforms": [
