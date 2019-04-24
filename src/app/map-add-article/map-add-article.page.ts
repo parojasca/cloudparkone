@@ -12,7 +12,7 @@ import {
   GoogleMapsAnimation
   
 } from '@ionic-native/google-maps';
-import { Platform } from '@ionic/angular';
+import { Platform,NavParams } from '@ionic/angular';
 @Component({
   selector: 'app-map-add-article',
   templateUrl: './map-add-article.page.html',
@@ -22,12 +22,20 @@ export class MapAddArticlePage implements OnInit {
   map: GoogleMap;
   GORYOKAKU_POINTS: ILatLng[] =[];
 
+  tipoArticulo:String
+  articulo:String
+  descripcion:String
 
-  constructor(private platform: Platform) { }
+  constructor(
+    private platform: Platform
+    ) {
+ 
+   }
 
   async ngOnInit() {
     await this.platform.ready();
     await this.loadMap();
+   
   }
   loadMap() {
     this.map = GoogleMaps.create('map_canvas', {
@@ -40,7 +48,7 @@ export class MapAddArticlePage implements OnInit {
         tilt: 30
       }
     });
-
+   
     let polygon: Polygon = this.map.addPolygonSync({
       'points': this.GORYOKAKU_POINTS,
       'strokeColor' : '#db0d3a',
@@ -52,7 +60,8 @@ export class MapAddArticlePage implements OnInit {
       this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((params: any[]) => {
         const latLng: LatLng = params[0];
        let agr=   this.GORYOKAKU_POINTS.push(latLng);
-        console.log(JSON.stringify(location, null, 2));
+       // console.log(JSON.stringify(location, null, 2));
+       console.log(JSON.stringify(latLng))
         this.map.addMarkerSync({
           position: latLng,
           title: latLng.toString(),
@@ -66,7 +75,7 @@ export class MapAddArticlePage implements OnInit {
 async onButtonClick() {
       this.map.clear();
       this.GORYOKAKU_POINTS=[];
-
+      
   }
 
   //poligono
@@ -78,7 +87,7 @@ async pintarPoligonp() {
     'strokeWidth': 10
   });
   const points: BaseArrayClass<ILatLng> = polygon.getPoints();
-
+  console.log(this.tipoArticulo);
   points.forEach((latLng: ILatLng, idx: number) => {
     let marker: Marker = this.map.addMarkerSync({
       draggable: true,

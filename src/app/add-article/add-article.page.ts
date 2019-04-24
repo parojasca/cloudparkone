@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController,NavController } from '@ionic/angular';
+import { ModalController,NavController, NavParams } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
@@ -11,12 +11,13 @@ export class AddArticlePage implements OnInit {
 //,private camera: Camera
 
 
-  constructor(public modalController: ModalController,
-    private navCtrl: NavController       
-    
-
- 
-   ) { }
+  constructor(
+    public modalController: ModalController,
+    private navCtrl: NavController,       
+    public navParams:NavParams
+   ) {
+  
+    }
 
   async ngOnInit() {
    // await this.platform.ready();

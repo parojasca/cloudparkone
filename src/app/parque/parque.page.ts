@@ -1,6 +1,6 @@
 
 import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { AlertController,ModalController } from '@ionic/angular';
+import { AlertController,ModalController,NavController } from '@ionic/angular';
 
 import {AddArticlePage} from '../add-article/add-article.page'
 import {Geolocation} from '@ionic-native/geolocation/ngx';
@@ -18,7 +18,8 @@ import {
   Marker,
   MarkerOptions,
   GoogleMapsAnimation,
-  MyLocation
+  MyLocation,
+  HtmlInfoWindow
 } from '@ionic-native/google-maps';
 
 @Component({
@@ -32,6 +33,10 @@ export class ParquePage implements OnInit {
   map: GoogleMap;
   loading: any;
 
+  tipoArticulo:String
+  articulo:String
+  descripcion:String
+
 //,public modalController: ModalController
   constructor(public alertController: AlertController,
     public modalController: ModalController,
@@ -39,7 +44,11 @@ export class ParquePage implements OnInit {
     public geolocation: Geolocation,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    private platform: Platform) {
+    private platform: Platform,
+    private navCtrl: NavController
+    ) {
+      
+  
   }
      
 
@@ -57,115 +66,162 @@ export class ParquePage implements OnInit {
 
     loadMap() {
       this.map = GoogleMaps.create('map_canvas', {
-        controls:{
-          myLocationButton:true
-        },
-        camera: {
-          target: {
-            lat: 4.645796,
-            lng: -74.088352
+        // controls:{
+        //   myLocationButton:true
+        // },
+        // camera: {
+        //   target: {
+        //     lat: 4.645796,
+        //     lng: -74.088352
            
-          },
-          zoom: 11,
-          tilt: 30
-        },
+        //   },
+        //   zoom: 11,
+        //   tilt: 30
+        // },
         
       });
   
-    }
-//Ubicarme
-async onButtonClick() {
-  this.map.clear();
 
-  this.loading = await this.loadingCtrl.create({
-    message: 'Please wait...'
-  });
-  await this.loading.present();
+    
+    let htmlInfoWindow = new HtmlInfoWindow();
 
-  // Get the location of you
-  this.map.getMyLocation().then((location: MyLocation) => {
-    this.loading.dismiss();
-    console.log(JSON.stringify(location, null ,2));
+    // flip-flop contents
+    // https://davidwalsh.name/css-flip
+    let frame: HTMLElement = document.createElement('div');
+    frame.innerHTML = `
+<div class="flip-container" id="flip-container">
+  
+  <div class="back">
+    <!-- back content -->
+    <ion-button routerDirection="calificacion" size="small" color="primary">Calificar</ion-button>
+    </div>
+  </div>
+</div>`;
 
-    // Move the map camera to the location with animation
-    this.map.animateCamera({
-      target: location.latLng,
-      zoom: 17,
-      tilt: 30
+    frame.addEventListener("click", (evt) => {
+      this.navMapa();
+    });
+    htmlInfoWindow.setContent(frame, {
+      width: "100px"
     });
 
-    // add a marker
-    let marker: Marker = this.map.addMarkerSync({
-      title: '@ionic-native/google-maps plugin!',
-      snippet: 'This plugin is awesome!',
-      position: location.latLng,
+    this.map.addMarker({
+      position: {lat: 35.685208, lng: -121.168225},
       draggable: true,
-      animation: GoogleMapsAnimation.BOUNCE
+      disableAutoPan: true
+    }).then((marker: Marker) => {
+
+      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+          htmlInfoWindow.open(marker);
+      });
+      marker.trigger(GoogleMapsEvent.MARKER_CLICK);
+
     });
 
-    // show the infoWindow
-    marker.showInfoWindow();
-
-    // If clicked it, display the alert
-    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      this.showToast('clicked!');
-    });
-  })
-  .catch(err => {
-    this.loading.dismiss();
-    this.showToast(err.error_message);
-  });
 }
+  
+//Ubicarme
+// async onButtonClick() {
+//   this.map.clear();
 
-async showToast(message: string) {
-  let toast = await this.toastCtrl.create({
-    message: message,
-    duration: 2000,
-    position: 'middle'
-  });
+//   this.loading = await this.loadingCtrl.create({
+//     message: 'Please wait...'
+//   });
+//   await this.loading.present();
 
-  toast.present();
-}
+//   // Get the location of you
+//   this.map.getMyLocation().then((location: MyLocation) => {
+//     this.loading.dismiss();
+//     console.log(JSON.stringify(location, null ,2));
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: AddArticlePage,
-      componentProps: { value: 123 }
-    });
-    return await modal.present();
+//     // Move the map camera to the location with animation
+//     this.map.animateCamera({
+//       target: location.latLng,
+//       zoom: 17,
+//       tilt: 30
+//     });
+
+//     // add a marker
+//     let marker: Marker = this.map.addMarkerSync({
+//        title: '@ionic-native/google-maps plugin!',
+//        snippet: '<ion-button (click)="navMapa()" size="small" color="primary">Calificar</ion-button>',
+//       position: location.latLng,
+//       draggable: true,
+//       animation: GoogleMapsAnimation.BOUNCE
+//     });
+//   let  infowindow = new google.maps.InfoWindow({
+//       content: " "
+//     });
+   
+//     // show the infoWindow
+//     marker.showInfoWindow();
+
+//     // If clicked it, display the alert
+//     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+//       //this.showToast('clicked!');
+//         this.navMapa();
+
+//     });
+
+    
+
+//     //********************************************** */
+    
+//   })
+//   .catch(err => {
+//     this.loading.dismiss();
+//     this.showToast(err.error_message);
+//   });
+// }
+
+// async showToast(message: string) {
+//   let toast = await this.toastCtrl.create({
+//     message: message,
+//     duration: 2000,
+//     position: 'middle'
+//   });
+
+//   toast.present();
+// }
+
+//   async presentModal() {
+//     const modal = await this.modalController.create({
+//       component: AddArticlePage,
+//       componentProps: { 
+//         tipoArticulo:this.tipoArticulo,
+//         articulo:this.articulo,
+//         descripcion:this.descripcion 
+//        }
+//     });
+//     return await modal.present();
+//   }
+  
+//   locali:string;
+
+
+//   parques=[
+//     {
+//       localidad : "Engativa",
+//       parque : "la clara",
+//       position: {lat: 41.624615, lng: 0.6238626}
+//     },
+  
+//     {
+//       localidad : "Usaquén",
+//       parque : "Brasilia",
+//       position: {lat: 41.624615, lng: 0.6248626}
+//     },
+//     {
+//       localidad : "Chapinero",
+//       parque : "Los Hippes",
+//       position: {lat: 41.624615, lng: 0.6258626}
+//     }
+//   ]
+
+  
+  navMapa(){
+  
+    this.navCtrl.navigateForward('calificacion')
+   
   }
-
-  locali:string;
-
-
-  parques=[
-    {
-      localidad : "Engativa",
-      parque : "la clara",
-      
-    },
-  
-    {
-      localidad : "Usaquén",
-      parque : "Brasilia",
-      
-    },
-    {
-      localidad : "Chapinero",
-      parque : "Los Hippes",
-      
-    },
-    {
-      localidad : "Santa Fe",
-      parque : "Lima",
-     
-    },
-    {
-      localidad : "Kennedy",
-      parque : "Caracas",
-      
-    },
-  ]
-
-  
 }

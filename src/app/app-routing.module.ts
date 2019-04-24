@@ -21,7 +21,11 @@ const routes: Routes = [
     path: 'dashboard',
    loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
   { path: 'add-article', loadChildren: './add-article/add-article.module#AddArticlePageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },  { path: 'map-add-article', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'map-add-article', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' },  { path: 'calificacion', loadChildren: './calificacion/calificacion.module#CalificacionPageModule' },
+
+ // { path: 'map-add-article/:idTipo,', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' }
+  //{ path: 'personas/:id', component: MiComponente },
 
 ];
 
