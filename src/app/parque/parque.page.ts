@@ -1,11 +1,14 @@
 
 import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { AlertController,ModalController,NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 
-import {AddArticlePage} from '../add-article/add-article.page'
-import {Geolocation} from '@ionic-native/geolocation/ngx';
+import { AddArticlePage } from '../add-article/add-article.page'
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Observable, pairs } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 declare var google: any;
 
+import { ParqueService } from "./parque.service";
 import {
   ToastController,
   Platform,
@@ -19,8 +22,12 @@ import {
   MarkerOptions,
   GoogleMapsAnimation,
   MyLocation,
-  HtmlInfoWindow
+  HtmlInfoWindow,
+  BaseArrayClass,
+  ILatLng,
+  LatLng
 } from '@ionic-native/google-maps';
+import { async } from 'q';
 
 @Component({
   selector: 'app-parque',
@@ -29,15 +36,16 @@ import {
 })
 
 export class ParquePage implements OnInit {
-
+  paises: any[] = [];
+  POINTS: any[] = [];
   map: GoogleMap;
   loading: any;
 
-  tipoArticulo:String
-  articulo:String
-  descripcion:String
+  tipoArticulo: String
+  articulo: String
+  descripcion: String
 
-//,public modalController: ModalController
+  //,public modalController: ModalController
   constructor(public alertController: AlertController,
     public modalController: ModalController,
     public zone: NgZone,
@@ -45,12 +53,15 @@ export class ParquePage implements OnInit {
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     private platform: Platform,
-    private navCtrl: NavController
-    ) {
-      
-  
+    private navCtrl: NavController,
+    private servicoPaises: ParqueService
+  ) {
+
+
+
+
   }
-     
+
 
   async ngOnInit() {
     const alert = await this.alertController.create({
@@ -66,162 +77,82 @@ export class ParquePage implements OnInit {
 
     loadMap() {
       this.map = GoogleMaps.create('map_canvas', {
-        // controls:{
-        //   myLocationButton:true
-        // },
-        // camera: {
-        //   target: {
-        //     lat: 4.645796,
-        //     lng: -74.088352
+        controls:{
+          myLocationButton:true
+        },
+        camera: {
+          target: {
+            lat: 4.645796,
+            lng: -74.088352
            
-        //   },
-        //   zoom: 11,
-        //   tilt: 30
-        // },
+          },
+          zoom: 11,
+          tilt: 30
+        },
         
       });
   
-
-    
-    let htmlInfoWindow = new HtmlInfoWindow();
-
-    // flip-flop contents
-    // https://davidwalsh.name/css-flip
-    let frame: HTMLElement = document.createElement('div');
-    frame.innerHTML = `
-<div class="flip-container" id="flip-container">
-  
-  <div class="back">
-    <!-- back content -->
-    <ion-button routerDirection="calificacion" size="small" color="primary">Calificar</ion-button>
-    </div>
-  </div>
-</div>`;
-
-    frame.addEventListener("click", (evt) => {
-      this.navMapa();
-    });
-    htmlInfoWindow.setContent(frame, {
-      width: "100px"
-    });
-
-    this.map.addMarker({
-      position: {lat: 35.685208, lng: -121.168225},
-      draggable: true,
-      disableAutoPan: true
-    }).then((marker: Marker) => {
-
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-          htmlInfoWindow.open(marker);
-      });
-      marker.trigger(GoogleMapsEvent.MARKER_CLICK);
-
-    });
-
-}
-  
+    }
 //Ubicarme
-// async onButtonClick() {
-//   this.map.clear();
+async onButtonClick() {
+  this.map.clear();
 
-//   this.loading = await this.loadingCtrl.create({
-//     message: 'Please wait...'
-//   });
-//   await this.loading.present();
+  this.loading = await this.loadingCtrl.create({
+    message: 'Please wait...'
+  });
+  await this.loading.present();
 
-//   // Get the location of you
-//   this.map.getMyLocation().then((location: MyLocation) => {
-//     this.loading.dismiss();
-//     console.log(JSON.stringify(location, null ,2));
+  // Get the location of you
+  this.map.getMyLocation().then((location: MyLocation) => {
+    this.loading.dismiss();
+    console.log(JSON.stringify(location, null ,2));
 
-//     // Move the map camera to the location with animation
-//     this.map.animateCamera({
-//       target: location.latLng,
-//       zoom: 17,
-//       tilt: 30
-//     });
+    // Move the map camera to the location with animation
+    this.map.animateCamera({
+      target: location.latLng,
+      zoom: 17,
+      tilt: 30
+    });
 
-//     // add a marker
-//     let marker: Marker = this.map.addMarkerSync({
-//        title: '@ionic-native/google-maps plugin!',
-//        snippet: '<ion-button (click)="navMapa()" size="small" color="primary">Calificar</ion-button>',
-//       position: location.latLng,
-//       draggable: true,
-//       animation: GoogleMapsAnimation.BOUNCE
-//     });
-//   let  infowindow = new google.maps.InfoWindow({
-//       content: " "
-//     });
-   
-//     // show the infoWindow
-//     marker.showInfoWindow();
+    // add a marker
+    let marker: Marker = this.map.addMarkerSync({
+      title: '@ionic-native/google-maps plugin!',
+      snippet: 'This plugin is awesome!',
+      position: location.latLng,
+      draggable: true,
+      animation: GoogleMapsAnimation.BOUNCE
+    });
 
-//     // If clicked it, display the alert
-//     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-//       //this.showToast('clicked!');
-//         this.navMapa();
+    // show the infoWindow
+    marker.showInfoWindow();
 
-//     });
+    // If clicked it, display the alert
+    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+      this.showToast('clicked!');
+    });
+  })
+  .catch(err => {
+    this.loading.dismiss();
+    this.showToast(err.error_message);
+  });
+}
 
-    
+async showToast(message: string) {
+  let toast = await this.toastCtrl.create({
+    message: message,
+    duration: 2000,
+    position: 'middle'
+  });
 
-//     //********************************************** */
-    
-//   })
-//   .catch(err => {
-//     this.loading.dismiss();
-//     this.showToast(err.error_message);
-//   });
-// }
+  toast.present();
+}
 
-// async showToast(message: string) {
-//   let toast = await this.toastCtrl.create({
-//     message: message,
-//     duration: 2000,
-//     position: 'middle'
-//   });
-
-//   toast.present();
-// }
-
-//   async presentModal() {
-//     const modal = await this.modalController.create({
-//       component: AddArticlePage,
-//       componentProps: { 
-//         tipoArticulo:this.tipoArticulo,
-//         articulo:this.articulo,
-//         descripcion:this.descripcion 
-//        }
-//     });
-//     return await modal.present();
-//   }
-  
-//   locali:string;
-
-
-//   parques=[
-//     {
-//       localidad : "Engativa",
-//       parque : "la clara",
-//       position: {lat: 41.624615, lng: 0.6238626}
-//     },
-  
-//     {
-//       localidad : "Usaquén",
-//       parque : "Brasilia",
-//       position: {lat: 41.624615, lng: 0.6248626}
-//     },
-//     {
-//       localidad : "Chapinero",
-//       parque : "Los Hippes",
-//       position: {lat: 41.624615, lng: 0.6258626}
-//     }
-//   ]
-
-  
-  navMapa(){
-  
-    this.navCtrl.navigateForward('calificacion')
-   
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AddArticlePage,
+      componentProps: { value: 123 }
+    });
+    return await modal.present();
   }
+ 
 }

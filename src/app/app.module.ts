@@ -13,11 +13,13 @@ import { ChartsModule } from 'ng2-charts';
 
 import {AddArticlePageModule} from './add-article/add-article.module'
 
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
    ChartsModule
