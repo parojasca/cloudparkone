@@ -27,7 +27,9 @@ import {
   ILatLng,
   LatLng
 } from '@ionic-native/google-maps';
-import { async } from 'q';
+
+import { AddArticleLinePage } from '../add-article-line/add-article-line.page';
+import { AddArticlePolygonPage } from '../add-article-polygon/add-article-polygon.page';
 
 @Component({
   selector: 'app-parque',
@@ -154,5 +156,19 @@ async showToast(message: string) {
     });
     return await modal.present();
   }
- 
+ async presentLine(){
+  const modal1 =await this.modalController.create({
+    component:AddArticleLinePage,
+    componentProps: { value: 123 }
+  });
+  return await modal1.present();
+}
+async presentPolygon(){
+  const modal2 =await this.modalController.create({
+component:AddArticlePolygonPage,
+componentProps: { value: 123 }
+  });
+  return await modal2.present();
+}
+
 }

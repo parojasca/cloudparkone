@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-article-line',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddArticleLinePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public modalController: ModalController,
+    private navCtrl: NavController,       
+    public navParams:NavParams) { }
 
   ngOnInit() {
   }
-
+  cerrarModal() {
+    this.modalController.dismiss()
+ 
+   }
+   navMapa(){
+     this.modalController.dismiss();
+     this.navCtrl.navigateForward('map-add-article-line')
+    
+   }
 }

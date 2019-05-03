@@ -14,6 +14,9 @@ import { ChartsModule } from 'ng2-charts';
 import {AddArticlePageModule} from './add-article/add-article.module'
 
 import { HttpClientModule } from "@angular/common/http";
+import { AddArticleLinePageModule } from './add-article-line/add-article-line.module';
+  
+import { AddArticlePolygonPageModule } from './add-article-polygon/add-article-polygon.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +26,10 @@ import { HttpClientModule } from "@angular/common/http";
     IonicModule.forRoot(),
     AppRoutingModule,
    ChartsModule
-   ,    AddArticlePageModule
+   ,    AddArticlePageModule,
+   AddArticleLinePageModule,
+   AddArticlePolygonPageModule
+
   ],
   providers: [
     StatusBar,
