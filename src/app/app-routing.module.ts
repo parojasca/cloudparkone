@@ -23,6 +23,9 @@ const routes: Routes = [
   { path: 'add-article', loadChildren: './add-article/add-article.module#AddArticlePageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'map-add-article', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' },  { path: 'calificacion', loadChildren: './calificacion/calificacion.module#CalificacionPageModule' },
+  { path: 'add-article-point', loadChildren: './add-article-point/add-article-point.module#AddArticlePointPageModule' },
+  { path: 'add-article-polygon', loadChildren: './add-article-polygon/add-article-polygon.module#AddArticlePolygonPageModule' },
+  { path: 'add-article-line', loadChildren: './add-article-line/add-article-line.module#AddArticleLinePageModule' },
 
  // { path: 'map-add-article/:idTipo,', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' }
   //{ path: 'personas/:id', component: MiComponente },

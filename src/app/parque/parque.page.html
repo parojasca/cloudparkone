@@ -24,12 +24,27 @@
 
   </ion-list>
 -->
-    <ion-fab vertical="center" horizontal="end" slot="fixed" (click)="presentModal()">
+    <!-- <ion-fab vertical="center" horizontal="end" slot="fixed" (click)="presentModal()">
         <ion-fab-button>
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
+    </ion-fab> -->
+    <!-- fab placed in the center of the content with a list on each side -->
+    <ion-fab vertical="center" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top" (click)="presentModal()"> 
+        <ion-fab-button><ion-icon name="pin"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+      <ion-fab-list side="bottom">
+        <ion-fab-button><ion-icon name="analytics"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+      <ion-fab-list side="start">
+        <ion-fab-button><ion-icon name="git-pull-request"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+    
     </ion-fab>
-  
 
     <div id="map_canvas">
         
