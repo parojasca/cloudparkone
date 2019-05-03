@@ -26,6 +26,9 @@ const routes: Routes = [
   { path: 'add-article-point', loadChildren: './add-article-point/add-article-point.module#AddArticlePointPageModule' },
   { path: 'add-article-polygon', loadChildren: './add-article-polygon/add-article-polygon.module#AddArticlePolygonPageModule' },
   { path: 'add-article-line', loadChildren: './add-article-line/add-article-line.module#AddArticleLinePageModule' },
+  { path: 'map-article-line', loadChildren: './map-article-line/map-article-line.module#MapArticleLinePageModule' },
+  { path: 'map-article-polygon', loadChildren: './map-article-polygon/map-article-polygon.module#MapArticlePolygonPageModule' },
+  { path: 'map-article-point', loadChildren: './map-article-point/map-article-point.module#MapArticlePointPageModule' },
 
  // { path: 'map-add-article/:idTipo,', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' }
   //{ path: 'personas/:id', component: MiComponente },
