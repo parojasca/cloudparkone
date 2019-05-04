@@ -17,6 +17,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AddArticleLinePageModule } from './add-article-line/add-article-line.module';
   
 import { AddArticlePolygonPageModule } from './add-article-polygon/add-article-polygon.module';
+import { AddArticlePointPageModule } from './add-article-point/add-article-point.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +29,8 @@ import { AddArticlePolygonPageModule } from './add-article-polygon/add-article-p
    ChartsModule
    ,    AddArticlePageModule,
    AddArticleLinePageModule,
-   AddArticlePolygonPageModule
+   AddArticlePolygonPageModule,
+   AddArticlePointPageModule
 
   ],
   providers: [

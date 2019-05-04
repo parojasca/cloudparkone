@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>map-article-line</ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>Articulo Tipo Linea</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div id="map_canvas"></div>
+      <ion-button ion-button (click)="ObtonBorrar()">Corregir</ion-button>
+      <ion-button ion-button (click)="pintarLinea()">Crear</ion-button>
+      
+  
 
 </ion-content>
