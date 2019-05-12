@@ -30,6 +30,7 @@ import {
 
 import { AddArticleLinePage } from '../add-article-line/add-article-line.page';
 import { AddArticlePolygonPage } from '../add-article-polygon/add-article-polygon.page';
+import { AddArticlePointPage } from '../add-article-point/add-article-point.page';
 
 @Component({
   selector: 'app-parque',
@@ -151,7 +152,7 @@ async showToast(message: string) {
 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: AddArticlePage,
+      component: AddArticlePointPage,
       componentProps: { value: 123 }
     });
     return await modal.present();

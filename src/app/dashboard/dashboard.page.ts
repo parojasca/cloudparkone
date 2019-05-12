@@ -48,7 +48,7 @@ constructor(
 
   getBarChart(){
     const data = {
-      labels: ['Vermelho', 'Azul', 'Amarelo', 'Verde', 'Roxo'],
+      labels: ['Simon Bolivar', 'Alcazares', 'Las Nieves', 'Los Hipies', '7 de Agosto'],
       datasets: [{
         label: 'número de votos',
         data: [12, 23, 15, 90, 5],
