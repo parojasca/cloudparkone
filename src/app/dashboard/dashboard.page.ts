@@ -50,7 +50,7 @@ constructor(
     const data = {
       labels: ['Simon Bolivar', 'Alcazares', 'Las Nieves', 'Los Hipies', '7 de Agosto'],
       datasets: [{
-        label: 'número de votos',
+        label: 'Afectacion de parques',
         data: [12, 23, 15, 90, 5],
         backgroundColor: [
           'rgb(255, 0, 0)',
@@ -79,7 +79,7 @@ constructor(
  
   getPieChart(){
     const data = {
-      labels: ['Vermelho', 'Azul', 'Amarelo'],
+      labels: ['Simon Bolivar', 'Alcazeres', '7 Agosto'],
       datasets: [{
         data: [300, 75, 224],
         backgroundColor: ['rgb(200, 6, 0)', 'rgb(36, 0, 255)', 'rgb(242, 255, 0)']
