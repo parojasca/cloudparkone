@@ -22,7 +22,7 @@ export class AddArticlePointPage implements OnInit {
    }
    navMapa(){
      this.modalController.dismiss();
-     this.navCtrl.navigateForward('map-add-article-point')
+     this.navCtrl.navigateForward('map-article-point')
     
    }
 
