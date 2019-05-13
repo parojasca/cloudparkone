@@ -2,7 +2,7 @@
 import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
 
-import { AddArticlePage } from '../add-article/add-article.page'
+import { AddArticlePointPage } from '../add-article-point/add-article-point.page'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Observable, pairs } from "rxjs";
 import { HttpClient } from "@angular/common/http";
@@ -150,7 +150,7 @@ async showToast(message: string) {
   toast.present();
 }
 
-  async presentModal() {
+  async presentModalPoint() {
     const modal = await this.modalController.create({
       component: AddArticlePointPage,
       componentProps: { value: 123 }

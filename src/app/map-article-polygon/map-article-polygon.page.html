@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>map-article-polygon</ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>Articulo Tipo Poligono</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div id="map_canvas"></div>
+  <ion-button ion-button (click)="onButtonClick()">Corregir</ion-button>
+  <ion-button ion-button (click)="pintarPoligonp()">Crear</ion-button>
 
 </ion-content>

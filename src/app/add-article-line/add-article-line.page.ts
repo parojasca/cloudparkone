@@ -21,7 +21,7 @@ export class AddArticleLinePage implements OnInit {
    }
    navMapa(){
      this.modalController.dismiss();
-     this.navCtrl.navigateForward('map-add-article-line')
+     this.navCtrl.navigateForward('map-article-line')
     
    }
 }
