@@ -42,6 +42,7 @@
     "core-js": "^2.5.4",
     "ng2-charts": "^2.0.4",
     "rxjs": "~6.3.3",
+    "server": "1.0.18",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
@@ -84,8 +85,8 @@
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyCop2lXa9xZu3I9oxh-ZKgl-ADyZeBKY3Q",
-        "API_KEY_FOR_IOS": "AIzaSyCop2lXa9xZu3I9oxh-ZKgl-ADyZeBKY3Q"
+        "API_KEY_FOR_ANDROID": "AIzaSyAjTjGIunMIKzq8jybWY-cm4d1N9-4-dGQ",
+        "API_KEY_FOR_IOS": "AIzaSyAjTjGIunMIKzq8jybWY-cm4d1N9-4-dGQ"
       }
     },
     "platforms": [
