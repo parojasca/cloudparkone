@@ -13,29 +13,15 @@
 </ion-header>
 
 <ion-content >
-    <!-- Searchbar with a cancel button and custom cancel button text -->
-  
 
-    <!-- 
- <ion-list  class="list list-md hydrated" *ngFor="let par of parques; let i = index">
-    <div class="item-note" >
-      {{par.parque}}
-    </div>
-
-  </ion-list>
--->
-    <!-- <ion-fab vertical="center" horizontal="end" slot="fixed" (click)="presentModal()">
-        <ion-fab-button>
-            <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab> -->
-    <!-- fab placed in the center of the content with a list on each side -->
     <ion-fab vertical="center" horizontal="end" slot="fixed">
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-      <ion-fab-list side="top" (click)="presentModalPoint()"> 
-        <ion-fab-button><ion-icon name="pin"></ion-icon></ion-fab-button>
+      <ion-fab-list side="top" > 
+        <ion-fab-button routerLink="/add-article-point">
+          <ion-icon name="pin"></ion-icon>
+        </ion-fab-button>
       </ion-fab-list>
       <ion-fab-list side="bottom" (click)="presentLine()">
         <ion-fab-button><ion-icon name="analytics"></ion-icon></ion-fab-button>

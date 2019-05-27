@@ -1,6 +1,7 @@
 
 import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Observable, pairs } from "rxjs";
@@ -56,7 +57,8 @@ export class ParquePage implements OnInit {
     public toastCtrl: ToastController,
     private platform: Platform,
     private navCtrl: NavController,
-    private servicoPaises: ParqueService
+    private servicoPaises: ParqueService,
+    private router: Router
   ) {
 
 
@@ -156,6 +158,12 @@ async showToast(message: string) {
     });
     return await modal.present();
   }
+
+/*
+  async presentModalPoint() {
+    this.router.navigate(['Aadd-article-point']);
+  }
+  */
  async presentLine(){
   const modal1 =await this.modalController.create({
     component:AddArticleLinePage,
