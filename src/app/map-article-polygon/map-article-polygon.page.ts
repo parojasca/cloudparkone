@@ -51,10 +51,11 @@ export class MapArticlePolygonPage implements OnInit {
     });
    
     let polygon: Polygon = this.map.addPolygonSync({
-      'points': this.GORYOKAKU_POINTS,
-      'strokeColor' : '#db0d3a',
-      'fillColor' : '#00ff6a',
-      'strokeWidth': 10
+      points: this.GORYOKAKU_POINTS,
+      strokeColor : '#db0d3a',
+      fillColor : '#00ff6a',
+      strokeWidth: 10,
+      icon: { url : './assets/img/arboles.png' }
     });
 
       //poligono
@@ -66,7 +67,8 @@ export class MapArticlePolygonPage implements OnInit {
         this.map.addMarkerSync({
           position: latLng,
           title: latLng.toString(),
-          animation: GoogleMapsAnimation.DROP
+          animation: GoogleMapsAnimation.DROP,
+          icon: { url : './assets/img/arboles.png' }
         });
       });
   //poligono
@@ -82,23 +84,27 @@ async onButtonClick() {
   //poligono
 async pintarPoligonp() {
   let polygon: Polygon = this.map.addPolygonSync({
-    'points': this.GORYOKAKU_POINTS,
-    'strokeColor' : '#AA00FF',
-    'fillColor' : '#00FFAA',
-    'strokeWidth': 10
+    points: this.GORYOKAKU_POINTS,
+    strokeColor : '#AA00FF',
+    fillColor: '#00FFAA',
+    strokeWidth: 10,
+    geodesic: true,
+    icon: { url : './assets/img/arboles.png' }
+
   });
-  const points: BaseArrayClass<ILatLng> = polygon.getPoints();
-  console.log(this.tipoArticulo);
-  points.forEach((latLng: ILatLng, idx: number) => {
-    let marker: Marker = this.map.addMarkerSync({
-      draggable: true,
-      position: latLng
-    });
-    marker.on(GoogleMapsEvent.MARKER_DRAG).subscribe((params) => {
-      let position: LatLng = params[0];
-      points.setAt(idx, position);
-    });
-  });
+  // const points: BaseArrayClass<ILatLng> = polygon.getPoints();
+  // console.log(this.tipoArticulo);
+  // points.forEach((latLng: ILatLng, idx: number) => {
+  //   let marker: Marker = this.map.addMarkerSync({
+  //     draggable: true,
+  //     position: latLng,
+  //     icon: { url : './assets/img/arboles.png' }
+  //   });
+  //   marker.on(GoogleMapsEvent.MARKER_DRAG).subscribe((params) => {
+  //     let position: LatLng = params[0];
+  //     points.setAt(idx, position);
+  //   });
+  // });
 }
 //Poligono
 

@@ -18,6 +18,8 @@ import { AddArticleLinePageModule } from './add-article-line/add-article-line.mo
 
 import { AddArticlePolygonPageModule } from './add-article-polygon/add-article-polygon.module';
 import { AddArticlePointPageModule } from './add-article-point/add-article-point.module';
+
+import { AgergarArticleLinePageModule  } from './agergar-article-line/agergar-article-line.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -30,7 +32,8 @@ import { AddArticlePointPageModule } from './add-article-point/add-article-point
     AddArticlePageModule,
     AddArticleLinePageModule,
     AddArticlePolygonPageModule,
-    AddArticlePointPageModule
+    AddArticlePointPageModule,
+    AgergarArticleLinePageModule
 
   ],
   providers: [

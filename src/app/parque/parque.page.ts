@@ -31,6 +31,7 @@ import {
 import { AddArticleLinePage } from '../add-article-line/add-article-line.page';
 import { AddArticlePolygonPage } from '../add-article-polygon/add-article-polygon.page';
 import { AddArticlePointPage } from '../add-article-point/add-article-point.page';
+import { AgergarArticleLinePage } from '../agergar-article-line/agergar-article-line.page';
 
 @Component({
   selector: 'app-parque',
@@ -130,10 +131,10 @@ async onButtonClick() {
     // show the infoWindow
     marker.showInfoWindow();
 
-    // If clicked it, display the alert
+    /*// If clicked it, display the alert
     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
       this.showToast('clicked!');
-    });
+    });*/
   })
   .catch(err => {
     this.loading.dismiss();
@@ -165,11 +166,12 @@ async showToast(message: string) {
   }
   */
  async presentLine(){
-  const modal1 =await this.modalController.create({
-    component:AddArticleLinePage,
-    componentProps: { value: 123 }
-  });
-  return await modal1.present();
+  // const modal1 =await this.modalController.create({
+  //   component:AgergarArticleLinePage,
+  //   componentProps: { value: 123 }
+  // });
+  // return await modal1.present();
+  this.navCtrl.navigateForward('agergar-article-line')
 }
 async presentPolygon(){
   const modal2 =await this.modalController.create({

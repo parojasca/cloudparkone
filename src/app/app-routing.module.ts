@@ -30,6 +30,9 @@ const routes: Routes = [
   { path: 'map-article-line', loadChildren: './map-article-line/map-article-line.module#MapArticleLinePageModule' },
   { path: 'map-article-polygon', loadChildren: './map-article-polygon/map-article-polygon.module#MapArticlePolygonPageModule' },
   { path: 'map-article-point', loadChildren: './map-article-point/map-article-point.module#MapArticlePointPageModule' },
+ 
+  { path: 'agergar-article-line', loadChildren: './agergar-article-line/agergar-article-line.module#AgergarArticleLinePageModule' },
+
 
  // { path: 'map-add-article/:idTipo,', loadChildren: './map-add-article/map-add-article.module#MapAddArticlePageModule' }
   //{ path: 'personas/:id', component: MiComponente },

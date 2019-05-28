@@ -70,9 +70,9 @@ async pintarLinea(){
     color: '#3e8dc9',
     width: 10,
     geodesic: true,
- //iconData: './assets/img/cuerpo_de_agua.png'
+
  icon: { url : './assets/img/cuerpo_de_agua.png' }
-    //clickable: true  // clickable = false in default
+  
   });
  
 }
